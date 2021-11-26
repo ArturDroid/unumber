@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,7 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   calculateAdd() {
-    String answer;
     int value;
     return value =
         int.parse(myController1.text) + int.parse(myController2.text);
@@ -58,14 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   calculateSubtract() {
-    String answer;
     int value;
     return value =
         int.parse(myController1.text) - int.parse(myController2.text);
   }
 
   calculateMultiply() {
-    String answer;
     int value;
     return value =
         int.parse(myController1.text) * int.parse(myController2.text);
@@ -107,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           TextField(
             controller: myController1,
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
             decoration: const InputDecoration(
               border: InputBorder.none,
               hintText: 'Enter the value',
@@ -120,6 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           TextField(
             controller: myController2,
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
             decoration: const InputDecoration(
               border: InputBorder.none,
               hintText: 'Enter the value',
