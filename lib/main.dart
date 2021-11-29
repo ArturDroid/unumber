@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red,
@@ -54,7 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
     int value;
     return value =
         int.parse(myController1.text) + int.parse(myController2.text);
-    ;
   }
 
   calculateSubtract() {
@@ -105,7 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           TextField(
             controller: myController1,
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+            ],
             decoration: const InputDecoration(
               border: InputBorder.none,
               hintText: 'Enter the value',
@@ -119,7 +121,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           TextField(
             controller: myController2,
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+            ],
             decoration: const InputDecoration(
               border: InputBorder.none,
               hintText: 'Enter the value',
