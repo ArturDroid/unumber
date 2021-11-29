@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -70,10 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   calculateDivide() {
-    String answer;
-    int value;
-    return value =
-        int.parse(myController1.text) ~/ int.parse(myController2.text);
+    return (int.parse(myController1.text) / int.parse(myController2.text));
   }
 
   _onChanged1(String value) {
@@ -86,6 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       charLength2 = value.length;
     });
+  }
+
+  bool checkEmpty() {
+    return myController1.text.isNotEmpty && myController2.text.isNotEmpty;
   }
 
   @override
@@ -138,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               TextButton(
                   onPressed: () {
-                    if (charLength1 != 0 && charLength2 != 0) {
+                    if (checkEmpty()) {
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -152,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Text('add')),
               TextButton(
                   onPressed: () {
-                    if (charLength1 != 0 && charLength2 != 0) {
+                    if (checkEmpty()) {
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -166,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Text('subtract')),
               TextButton(
                   onPressed: () {
-                    if (charLength1 != 0 && charLength2 != 0) {
+                    if (checkEmpty()) {
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -180,12 +182,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Text('multiply')),
               TextButton(
                   onPressed: () {
-                    if (charLength1 != 0 && charLength2 != 0) {
+                    if (checkEmpty()) {
                       showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            content: Text(calculateDivide().toString()),
+                            content: Text(calculateDivide().toStringAsFixed(3)),
                           );
                         },
                       );
