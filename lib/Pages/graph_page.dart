@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'dart:developer' as dev;
+import 'package:unumber/widgets/circle_layout.dart';
+import 'package:widget_arrows/widget_arrows.dart';
 
 class GraphPage extends StatefulWidget {
   const GraphPage({Key? key, required this.title}) : super(key: key);
@@ -20,22 +23,87 @@ class GraphPage extends StatefulWidget {
 }
 
 class _GraphPageState extends State<GraphPage> {
+  final List<LayoutId> items = [];
+
+  @override
+  void initState() {
+    testDataFill();
+    super.initState();
+  }
+
+  void testDataFill() {
+    // List<String> testData = ["1", "2", "3"];
+    // List<String> testData = ["1", "2", "3", "4", "5", "6"];
+    List<String> testData = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    for (var data in testData) {
+      items.add(LayoutId(
+        id: data,
+        child: Container(
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.red,
+          ),
+          padding: const EdgeInsets.all(10),
+          child: MaterialButton(
+            onPressed: () {},
+            child: Text(data),
+          ),
+        ),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(widget.title, style: const TextStyle(fontSize: 30, fontStyle: FontStyle.normal),),
-          ],
+    return ArrowContainer(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: Center(
+          child: AspectRatio(
+            aspectRatio: 1 / 1,
+            child: Container(
+              alignment: Alignment.center,
+              // decoration: const BoxDecoration(color: Colors.cyan),
+              child: _buildGraphView(),
+            ),
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _buildGraphView() {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double outerRadius = min(width * 3 / 4, height * 3 / 4);
+
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          _drawCircle(outerRadius + 5, Colors.redAccent),
+          _drawCircle(outerRadius, Colors.transparent),
+          CustomMultiChildLayout(
+            delegate:
+                CircleLayoutDelegate(childs: items, radius: outerRadius / 2),
+            children: items,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _drawCircle(double outerRadius, Color color) {
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(color: color, width: 5),
+          shape: BoxShape.circle,
+          color: Colors.transparent),
+      width: outerRadius,
+      height: outerRadius,
     );
   }
 }
