@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:unumber/widgets/circle_layout.dart';
 import 'package:widget_arrows/widget_arrows.dart';
+import 'package:unumber/widgets/circle_widget.dart';
 
 class GraphPage extends StatefulWidget {
   const GraphPage({Key? key, required this.title}) : super(key: key);
@@ -60,15 +61,24 @@ class _GraphPageState extends State<GraphPage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Center(
-          child: AspectRatio(
-            aspectRatio: 1 / 1,
-            child: Container(
-              alignment: Alignment.center,
-              // decoration: const BoxDecoration(color: Colors.cyan),
-              child: _buildGraphView(),
+        body: Row(
+          children: [
+            Center(
+              child: AspectRatio(
+                aspectRatio: 1 / 1,
+                child: Container(
+                  alignment: Alignment.center,
+                  // decoration: const BoxDecoration(color: Colors.cyan),
+                  child: _buildGraphView(),
+                ),
+              ),
             ),
-          ),
+            CircleWidget(
+              colorCircle:  Colors.red,
+              colorText: Colors.green,
+              digits: '5',
+            )
+          ],
         ),
       ),
     );
