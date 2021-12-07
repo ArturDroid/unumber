@@ -61,7 +61,7 @@ class _GraphPageState extends State<GraphPage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Row(
+        body: Column(
           children: [
             Center(
               child: AspectRatio(
