@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:unumber/widgets/circle_layout.dart';
-import 'package:widget_arrows/widget_arrows.dart';
 import 'package:unumber/widgets/circle_widget.dart';
+import 'package:widget_arrows/widget_arrows.dart';
 
 class GraphPage extends StatefulWidget {
   const GraphPage({Key? key, required this.title}) : super(key: key);
@@ -24,7 +24,7 @@ class GraphPage extends StatefulWidget {
 }
 
 class _GraphPageState extends State<GraphPage> {
-  final List<LayoutId> items = [];
+  final List<Widget> items = [];
 
   @override
   void initState() {
@@ -37,19 +37,11 @@ class _GraphPageState extends State<GraphPage> {
     // List<String> testData = ["1", "2", "3", "4", "5", "6"];
     List<String> testData = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
     for (var data in testData) {
-      items.add(LayoutId(
-        id: data,
-        child: Container(
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.red,
-          ),
-          padding: const EdgeInsets.all(10),
-          child: MaterialButton(
-            onPressed: () {},
-            child: Text(data),
-          ),
-        ),
+      items.add(CircleWidget(
+        key: Key(data),
+        colorCircle: Colors.red,
+        colorText: Colors.white,
+        digits: data,
       ));
     }
   }
@@ -73,11 +65,6 @@ class _GraphPageState extends State<GraphPage> {
                 ),
               ),
             ),
-            CircleWidget(
-              colorCircle:  Colors.red,
-              colorText: Colors.green,
-              digits: '5',
-            )
           ],
         ),
       ),
@@ -88,6 +75,10 @@ class _GraphPageState extends State<GraphPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double outerRadius = min(width * 3 / 4, height * 3 / 4);
+    final List<LayoutId> _subItems = items
+        .sublist(1)
+        .map((e) => LayoutId(id: e.key ?? items.indexOf(e), child: e))
+        .toList();
 
     return Container(
       padding: const EdgeInsets.all(10.0),
@@ -95,11 +86,11 @@ class _GraphPageState extends State<GraphPage> {
         alignment: AlignmentDirectional.center,
         children: <Widget>[
           _drawCircle(outerRadius + 5, Colors.redAccent),
-          _drawCircle(outerRadius, Colors.transparent),
+          items.first,
           CustomMultiChildLayout(
-            delegate:
-                CircleLayoutDelegate(childs: items, radius: outerRadius / 2),
-            children: items,
+            delegate: CircleLayoutDelegate(
+                childs: _subItems, radius: outerRadius / 2),
+            children: _subItems,
           ),
         ],
       ),

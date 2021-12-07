@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unumber/Pages/graph_page.dart';
-import 'dart:developer';
-import 'package:unumber/calculations/calculations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -32,16 +30,12 @@ class _HomePageState extends State<HomePage> {
             builder: (context) => const GraphPage(title: "Test title")),
       );
     }
-    
-    log('value1: ${Calculations().valueYear(1998)}');
-    
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body:
-      Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -52,10 +46,8 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontSize: 20),
               ),
               onPressed: _calculate,
-              style: ElevatedButton.styleFrom(
-                primary: Colors.red,
-                elevation: 2
-              ),
+              style:
+                  ElevatedButton.styleFrom(primary: Colors.red, elevation: 2),
             ),
             const Padding(padding: EdgeInsets.only(bottom: 20))
           ],

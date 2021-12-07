@@ -18,15 +18,15 @@ class CircleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
-      height: 200,
+      width: 50,
+      height: 50,
       decoration: BoxDecoration(color: colorCircle, shape: BoxShape.circle),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(minWidth: 1.0),
           child: Text(
             digits,
-            style: TextStyle(color: colorText, fontSize: 70),
+            style: TextStyle(color: colorText, fontSize: 20),
           ),
         ),
       ),
