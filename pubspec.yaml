@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animated_text_kit: ^4.2.1
   flutter:
     sdk: flutter
 
@@ -39,6 +40,7 @@ dependencies:
 
 dev_dependencies:
   flutter_test:
+
     sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -53,13 +55,15 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   fonts:
-    - family: TangoSans
+    - family: NocturnoBG
       fonts:
-        - asset: assets/fonts/TangoSans.ttf
-        - asset: assets/fonts/TangoSans-Italic.ttf
+        - asset: assets/fonts/NocturnoBG.otf
+        - asset: assets/fonts/NocturnoBG-Italic.otf
           style: italic
+
+
+
 
 
   # The following line ensures that the Material Icons font is

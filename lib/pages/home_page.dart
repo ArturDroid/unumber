@@ -1,5 +1,5 @@
-import 'dart:developer' as developer;
 import 'dart:developer';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
   void dateCheck() {
     setState(() {
       _isDateCorrect =
-          dateController.text.isEmpty ? false : dateValidateCalculation();
+      dateController.text.isEmpty ? false : dateValidateCalculation();
       _isButtonVisible = showButton();
     });
   }
@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
   void monthCheck() {
     setState(() {
       _isMonthCorrect =
-          monthController.text.isEmpty ? false : monthValidateCalculation();
+      monthController.text.isEmpty ? false : monthValidateCalculation();
       _isButtonVisible = showButton();
     });
   }
@@ -149,18 +149,18 @@ class _HomePageState extends State<HomePage> {
             // const Spacer(),
             Padding(
               padding: const EdgeInsets.only(top: 30),
-              child:  Text(
+              child: Text(
                 '"Слова вместо чисел, и числа вместо слов."',
                 style: TextStyle(
-                  fontFamily: 'TangoSans',
+                  fontFamily: 'NocturnoBG',
                   fontSize: 12,
-                  //fontStyle: FontStyle.italic,
+                  fontStyle: FontStyle.italic,
                   color: Colors.grey,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 50),
+              padding: const EdgeInsets.only(bottom: 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                       controller: dateController,
                       textAlign: TextAlign.center,
                       keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
+                      TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
                       ],
@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color:
-                                    _isDateCorrect ? Colors.blue : Colors.red,
+                                _isDateCorrect ? Colors.blue : Colors.red,
                                 width: 2)),
                         border: OutlineInputBorder(),
                         labelText: 'Date',
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                         controller: monthController,
                         textAlign: TextAlign.center,
                         keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                        TextInputType.numberWithOptions(decimal: true),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
                         ],
@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                       controller: yearController,
                       textAlign: TextAlign.center,
                       keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
+                      TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
                       ],
@@ -235,7 +235,7 @@ class _HomePageState extends State<HomePage> {
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color:
-                                    _isYearCorrect ? Colors.blue : Colors.red,
+                                _isYearCorrect ? Colors.blue : Colors.red,
                                 width: 2)),
                         border: OutlineInputBorder(),
                         labelText: 'Year',
@@ -247,7 +247,18 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            Text('Введи дату рождения'),
+            AnimatedTextKit(
+                animatedTexts: [
+                  RotateAnimatedText('ВВЕДИТЕ'),
+                  RotateAnimatedText('ДАТУ'),
+                  RotateAnimatedText('РОЖДЕНИЯ'),
+                ],
+              repeatForever: true,
+
+            ),
+
+
+            //Text('Введи дату рождения',style: TextStyle(color: Colors.grey),),
             const Spacer(),
             Align(
               alignment: Alignment.bottomCenter,
